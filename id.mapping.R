@@ -1,6 +1,6 @@
 #--functions to map ids using a graph-based model--
-#--this file by RW based on my older logs
-#--date:29 May 2013
+#--this file started on 29 May 2013, based on older code
+#--this file updated on 6 April 2015 for GitHub posting
 
 library(igraph)
 
@@ -54,4 +54,36 @@ summarise.id2id.mapping<-function(id2idObj)
  res<-data.frame(index=1:length(id2idObj$id2idCC),no=nnodes,no.id1=nid1,no.id2=nid2,row.names=NULL)
  return(res)
 }
+
+#--microarray example--
+#--the array data is indexed by Genbank ids, but the probe sequences were available (supplied by Mark Cowley), so we remapped to mm9 using Bowtie (Hugh French)
+#--and then I took the uniquely mapped probe sequences and kept those (all original logs are available)
+#--this .rda file lists the original ids in the first column, and the mm9 RefSeq ids in the second
+#--the functions in this file provide a fairly general way of dealing with one-to-many, many-to-one, and many-to-many identifier mapping situations, by making use of graphs for an underlying data model
+#--will try and extend this to mutlipartite graphs for multiple sets of ids (any decade now...)
+
+source(file="")
+load(file="")
+
+#--the basic out is generated using define.id2id.mapping.as.graph
+#--which generates an igraph object, a set of connected components that defines each "cluster" of ids, and vectors of teh unique ids of each type
+a<-define.id2id.mapping.as.graph(compugen.refseq2refseq.single.mapped.read)
+
+#--in each component, the ids from each column can extracted easily (e.g. so you can resample one of many, or use them to index data for average etc)
+#--illustrate here for the first set of ids, outout is another list
+a.firstset<-extract.ids(a,"first")
+
+#--and a finally a useful summary table can be generated to provide a global overview of the identifier mapping results...you could work directly with the graph object
+a.summTable<-summarise.id2id.mapping(a)
+
+#> head(a.summTable)
+#index no no.id1 no.id2
+#1     1  2      1      1
+#2     2  2      1      1
+#3     3  2      2      1
+#4     4  2      1      1
+#5     5  5      1      4
+#6     6  2      1      1
+
+
 
