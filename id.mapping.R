@@ -62,19 +62,17 @@ summarise.id2id.mapping<-function(id2idObj)
 #--the functions in this file provide a fairly general way of dealing with one-to-many, many-to-one, and many-to-many identifier mapping situations, by making use of graphs for an underlying data model
 #--will try and extend this to mutlipartite graphs for multiple sets of ids (any decade now...)
 
-source(file="")
-load(file="")
-
 #--the basic out is generated using define.id2id.mapping.as.graph
 #--which generates an igraph object, a set of connected components that defines each "cluster" of ids, and vectors of teh unique ids of each type
-a<-define.id2id.mapping.as.graph(compugen.refseq2refseq.single.mapped.read)
+load(file="compugen.refseq2refseq.single.mapped.read.rda")
+#a<-define.id2id.mapping.as.graph(compugen.refseq2refseq.single.mapped.read)
 
 #--in each component, the ids from each column can extracted easily (e.g. so you can resample one of many, or use them to index data for average etc)
 #--illustrate here for the first set of ids, outout is another list
-a.firstset<-extract.ids(a,"first")
+#a.firstset<-extract.ids(a,"first")
 
 #--and a finally a useful summary table can be generated to provide a global overview of the identifier mapping results...you could work directly with the graph object
-a.summTable<-summarise.id2id.mapping(a)
+#a.summTable<-summarise.id2id.mapping(a)
 
 #> head(a.summTable)
 #index no no.id1 no.id2
