@@ -2,12 +2,13 @@
 #--this file started on 29 May 2013, based on older code
 #--this file updated on 6 April 2015 for GitHub posting
 
-library(igraph)
+#library(igraph)
 
 define.id2id.mapping.as.graph<-function(id2idTable)
 {
  #--'id2idTable' is a matrix that contains one set of ids in col1 and the other in col2
  #--implicitly, this should be bipartitite
+ require(igraph)
  res<-list(id2idGraph=NULL,id2idCC=NULL,uid1=NULL,uid2=NULL)
  res$id2idGraph<-graph.edgelist(id2idTable,directed=F)
  res$id2idCC<-decompose.graph(res$id2idGraph,mode="strong",min.vertices=1)
@@ -20,6 +21,8 @@ extract.ids<-function(id2idObj,type=c("first","second","both"))
 {
  #--'id2idObj' is an output from 'define.id2id.mapping.as.graph'
  #--'type' will extract id1 ('first'), id2 ('second') or all ('both') ids within an element of 'id2idObj$id2idCC'
+ require(igraph)
+ 
  res=NULL
  
  #--extract all ids...
@@ -65,14 +68,14 @@ summarise.id2id.mapping<-function(id2idObj)
 #--the basic out is generated using define.id2id.mapping.as.graph
 #--which generates an igraph object, a set of connected components that defines each "cluster" of ids, and vectors of teh unique ids of each type
 load(file="compugen.refseq2refseq.single.mapped.read.rda")
-#a<-define.id2id.mapping.as.graph(compugen.refseq2refseq.single.mapped.read)
+a<-define.id2id.mapping.as.graph(compugen.refseq2refseq.single.mapped.read)
 
 #--in each component, the ids from each column can extracted easily (e.g. so you can resample one of many, or use them to index data for average etc)
 #--illustrate here for the first set of ids, outout is another list
-#a.firstset<-extract.ids(a,"first")
+a.firstset<-extract.ids(a,"first")
 
 #--and a finally a useful summary table can be generated to provide a global overview of the identifier mapping results...you could work directly with the graph object
-#a.summTable<-summarise.id2id.mapping(a)
+a.summTable<-summarise.id2id.mapping(a)
 
 #> head(a.summTable)
 #index no no.id1 no.id2
