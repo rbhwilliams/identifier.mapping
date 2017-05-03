@@ -13,12 +13,12 @@ The code described here is comprised of three R functions, and uses *igraph* pac
 
 - *id2idGraph*: an object of class *igraph* containing a graph defined by mappings between included identifiers. The graph formed by this procedure is implicitly bipartite, as by definition edges can only exist between identifiers of different type. Identifiers from either type that are not associated with an identifier of the other type are not included in this analysis, as they are not defined in the node-edge list. 
 
-- id2idCC: an object of class *list*. Each element contains a connected component (themselves objects of class *igraph*) formed by decomposing the complete graph.
+- *id2idCC*: an object of class *list*. Each element contains a connected component (themselves objects of class *igraph*) formed by decomposing the complete graph.
 
-- uid1: a character vector containing the unique set of identifiers of a first type  
+- *uid1*: a character vector containing the unique set of identifiers of a first type  
 
-- uid2: a character vector containing the unique set of identifiers of a second type 
+- *uid2*: a character vector containing the unique set of identifiers of a second type 
 
-extract.ids: using the output of *define.id2id.mapping.as.graph*, extract identifiers of a specific type from each component. Returns an object of class *list*, indexed by connected component, whose elements contain a character vector of identifiers.
+2. *extract.ids*: using the output of *define.id2id.mapping.as.graph*, extract identifiers of a specific type from each component. Returns an object of class *list*, indexed by connected component, whose elements contain a character vector of identifiers.
 
-summarise.id2id.mapping: using the output of *define.id2id.mapping.as.graph*, this function generates a summary table, with rows indexed by connected component, and whose columns reporting the total number of nodes, and the number of nodes of each each type.
+3. *summarise.id2id.mapping*: using the output of *define.id2id.mapping.as.graph*, this function generates a summary table, with rows indexed by connected component, and whose columns reporting the total number of nodes, and the number of nodes of each each type.
