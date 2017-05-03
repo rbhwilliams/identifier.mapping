@@ -10,11 +10,15 @@ For simplicity, we start by assuming we are working with two sets of identifiers
 The code described here is comprised of three R functions, and uses *igraph* package for all graph computations. The functions are:
 
 *define.id2id.mapping.as.graph*: From an input table (node-edge list) defining the inter-relationships between two sets of identifiers, this function outputs an R object of class *list* containing the following components:
-id2idGraph: an object of class \textit{igraph} containing a graph defined by mappings between included identifiers. The graph formed by this procedure is implicitly \textit{bipartite}, as by definition edges can only exist between identifiers of different type [ref]. Identifiers from either type that are not associated with an identifier of the other type are not included in this analysis, as they are not defined in the node--edge list. 
-\item id2idCC: an object of class \texttt{list}. Each element contains a connected component (themselves objects of class \texttt{igraph}) formed by decomposing the complete graph.
-\item uid1: a character vector containing the unique set of identifiers of a first type  
-\item uid2: a character vector containing the unique set of identifiers of a second type 
-\end{itemize}
-\item \texttt{extract.ids}: using the output of \texttt{define.id2id.mapping.as.graph}, extract identifiers of a specific type from each component. Returns an object of class \texttt{list}, indexed by connected component, whose elements contain a character vector of identifiers.
-\item \texttt{summarise.id2id.mapping}: using the output of \texttt{define.id2id.mapping.as.graph}, this function generates a summary table, with rows indexed by connected component, and whose columns reporting the total number of nodes, and the number of nodes of each each type.
-\end{itemize}
+
+id2idGraph: an object of class *igraph* containing a graph defined by mappings between included identifiers. The graph formed by this procedure is implicitly bipartite, as by definition edges can only exist between identifiers of different type. Identifiers from either type that are not associated with an identifier of the other type are not included in this analysis, as they are not defined in the node-edge list. 
+
+id2idCC: an object of class *list*. Each element contains a connected component (themselves objects of class *igraph*) formed by decomposing the complete graph.
+
+uid1: a character vector containing the unique set of identifiers of a first type  
+
+uid2: a character vector containing the unique set of identifiers of a second type 
+
+extract.ids: using the output of *define.id2id.mapping.as.graph*, extract identifiers of a specific type from each component. Returns an object of class *list*, indexed by connected component, whose elements contain a character vector of identifiers.
+
+summarise.id2id.mapping: using the output of *define.id2id.mapping.as.graph*, this function generates a summary table, with rows indexed by connected component, and whose columns reporting the total number of nodes, and the number of nodes of each each type.
